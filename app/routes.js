@@ -28,16 +28,16 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/mood-post', (req, res) => {
-      db.collection('mood-post').save({mood: req.body.mood, msg: req.body.msg, liked: false}, (err, result) => {
+    app.post('/todo-post', (req, res) => {
+      db.collection('todos').save({mood: req.body.mood, msg: req.body.msg, liked: false}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
 
-    app.put('/mood-post', (req, res) => {
-      db.collection('mood-post')
+    app.put('/todo-update', (req, res) => {
+      db.collection('todos')
       .findOneAndUpdate({mood: req.body.mood, msg: req.body.msg}, {
         $set: {
           liked:req.body.liked = true
@@ -51,8 +51,8 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/mood-delete', (req, res) => {
-      db.collection('mood-post').findOneAndDelete({mood: req.body.mood, msg: req.body.msg}, (err, result) => {
+    app.delete('/delete', (req, res) => {
+      db.collection('todos').findOneAndDelete({mood: req.body.mood, msg: req.body.msg}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
