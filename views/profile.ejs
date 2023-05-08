@@ -20,8 +20,7 @@
           <% for(var i=0; i<todos.length; i++) { %>
             <li class="todo">
               <p><%= todos[i].todo %></p>
-              <p class="hidden todoId"><%= todos[i]._id %></p>
-              <button onclick="toggleCompleted()">Edit</button>
+              <button onclick="toggleCompleted()">Complete</button>
               <button onclick="deleteTodo('<%= todos[i]._id %>')">Remove</button>
             </li>
          <% } %>

@@ -1,5 +1,4 @@
 function deleteTodo(id) {
-  console.log(id)
   fetch('/delete', {
     method: 'delete',
     headers: {
