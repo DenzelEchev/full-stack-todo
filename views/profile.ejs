@@ -21,7 +21,7 @@
             <li class="todo">
               <p><%= todos[i].todo %></p>
               <p class="hidden todoId"><%= todos[i]._id %></p>
-              <button onclick="">Edit</button>
+              <button onclick="toggleCompleted()">Edit</button>
               <button onclick="deleteTodo('<%= todos[i]._id %>')">Remove</button>
             </li>
          <% } %>

@@ -13,3 +13,7 @@ function deleteTodo(id) {
     window.location.reload()
   })
 }
+
+function toggleCompleted(){
+  document.querySelector('.todo').classList.toggle('completed')
+}
