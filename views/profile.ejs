@@ -12,11 +12,21 @@
     <h1>To Do Tracker</h1>
     <form action="/todo-post" method="POST">
       <input type="text" name="todo" placeholder="Input Task">
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="input-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <div>
       <section class="todos-list">
-
+        <ul>
+          <% for(var i=0; i<todos.length; i++) { %>
+            <li class="todo">
+              <p><%= todos[i].todo %></p>
+              <p class="hidden todoId"><%= todos[i]._id %></p>
+              <button onclick="">Edit</button>
+              <button onclick="deleteTodo('<%= todos[i]._id %>')">Remove</button>
+            </li>
+         <% } %>
+         
+        </ul>
       </section>
     </div>
     <script src="main.js"></script>

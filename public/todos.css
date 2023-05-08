@@ -27,8 +27,11 @@ input:focus{
     outline: none;
 }
 
-button{
+.input-btn{
     border: none;
     background-color: white;
     font-size: 2rem;
+}
+.hidden{
+    display: none;
 }

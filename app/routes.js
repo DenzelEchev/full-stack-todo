@@ -1,3 +1,4 @@
+const ObjectId = require('mongodb').ObjectId
 module.exports = function(app, passport, db) {
 
 // normal routes ===============================================================
@@ -9,11 +10,11 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('mood-post').find().toArray((err, result) => {
+        db.collection('todos').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
-            messages: result
+            todos: result
           })
         })
     });
@@ -29,7 +30,7 @@ module.exports = function(app, passport, db) {
 // message board routes ===============================================================
 
     app.post('/todo-post', (req, res) => {
-      db.collection('todos').save({mood: req.body.mood, msg: req.body.msg, liked: false}, (err, result) => {
+      db.collection('todos').save({todo: req.body.todo}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
@@ -38,9 +39,9 @@ module.exports = function(app, passport, db) {
 
     app.put('/todo-update', (req, res) => {
       db.collection('todos')
-      .findOneAndUpdate({mood: req.body.mood, msg: req.body.msg}, {
+      .findOneAndUpdate({todo: req.body.todo, id: req.body.id}, {
         $set: {
-          liked:req.body.liked = true
+          todo:req.body.todo
         }
       }, {
         sort: {_id: -1},
@@ -52,7 +53,7 @@ module.exports = function(app, passport, db) {
     })
 
     app.delete('/delete', (req, res) => {
-      db.collection('todos').findOneAndDelete({mood: req.body.mood, msg: req.body.msg}, (err, result) => {
+      db.collection('todos').findOneAndDelete({_id: ObjectId(req.body.id)}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
