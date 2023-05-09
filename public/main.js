@@ -13,6 +13,7 @@ function deleteTodo(id) {
   })
 }
 
-function toggleCompleted(){
-  document.querySelector('.todo').classList.toggle('completed')
+function toggleCompleted(i){
+  let element = document.body.querySelector(`.todo[data-number="${i}"]`)
+  element.classList.toggle('completed')
 }

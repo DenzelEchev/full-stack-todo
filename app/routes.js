@@ -39,7 +39,7 @@ module.exports = function(app, passport, db) {
 
     app.put('/todo-update', (req, res) => {
       db.collection('todos')
-      .findOneAndUpdate({todo: req.body.todo, id: req.body.id}, {
+      .findOneAndUpdate({_id: req.body.id}, {
         $set: {
           todo:req.body.todo
         }
